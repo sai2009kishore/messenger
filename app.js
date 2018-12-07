@@ -34,12 +34,24 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
+let collections = ['Messages'];
 // Connect to the db
 MongoClient.connect(config.MONGODB_URL, function (err, db) {
   if (err) {
     throw err
   } else {
-    console.log('Connected to MongoDB');
+    let missing_collections = collections.slice();
+    db.listCollections().toArray(function (err, collInfos) {
+      collInfos.map(collection => {
+        if (collections.includes(collection.name)) {
+          missing_collections.pop(collection.name);
+        }
+      });
+      missing_collections.map(collection => {
+        db.createCollection(collection, { autoIndexId: true })
+        console.log('Created collection ' + collection);
+      });
+    });
   }
 });
 

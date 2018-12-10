@@ -4,11 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoUtil = require('./public/utils/mongoUtil');
-
 var indexRouter = require('./routes/index');
-var messageRouter = require('./routes/message');
-var userRouter = require('./routes/user');
-
 var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -21,8 +17,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/messages', messageRouter);
-app.use('/users', userRouter);
 
 app.use(function (req, res, next) {
   next(createError(404));

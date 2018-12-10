@@ -3,13 +3,13 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoUtil = require('./public/utils/mongoUtil');
 
 var indexRouter = require('./routes/index');
+var messageRouter = require('./routes/message');
+var userRouter = require('./routes/user');
 
 var app = express();
-
-var MongoClient = require('mongodb').MongoClient;
-var config = require('./config.json');
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -21,6 +21,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/messages', messageRouter);
+app.use('/users', userRouter);
 
 app.use(function (req, res, next) {
   next(createError(404));
@@ -34,21 +36,22 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-let collections = ['Messages'];
-// Connect to the db
-MongoClient.connect(config.MONGODB_URL, function (err, db) {
+let collections = require('./config.json').INITIAL_DB;
+
+mongoUtil.connectToServer(function (err, db) {
   if (err) {
     throw err
   } else {
-    let missing_collections = collections.slice();
+    console.log('Connected to MongoDB');
+    let missing_collections = Object.keys(collections);
     db.listCollections().toArray(function (err, collInfos) {
       collInfos.map(collection => {
-        if (collections.includes(collection.name)) {
+        if (collection.name in collections) {
           missing_collections.pop(collection.name);
         }
       });
       missing_collections.map(collection => {
-        db.createCollection(collection, { autoIndexId: true })
+        db.createCollection(collection, collections[collection]);
         console.log('Created collection ' + collection);
       });
     });

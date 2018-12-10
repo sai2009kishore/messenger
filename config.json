@@ -1,3 +1,62 @@
 {
-    "MONGODB_URL": "mongodb://localhost:27018/test"
+    "MONGODB_URL": "mongodb://localhost:27018/test",
+    "INITIAL_DB": {
+        "Messages": {
+            "autoIndexId": true,
+            "validator": {
+                "$jsonSchema": {
+                    "bsonType": "object",
+                    "required": [
+                        "text",
+                        "state",
+                        "sender",
+                        "receiver"
+                    ],
+                    "properties": {
+                        "text": {
+                            "bsonType": "string",
+                            "description": "must be a string and is required"
+                        },
+                        "state": {
+                            "bsonType": "int",
+                            "minimum": 0,
+                            "maximum": 2,
+                            "description": "must be a int and is required"
+                        },
+                        "sender": {
+                            "bsonType": "string",
+                            "description": "must be a string and is required"
+                        },
+                        "receiver": {
+                            "bsonType": "string",
+                            "description": "must be a string and is required"
+                        }
+                    }
+                }
+            }
+        },
+        "Users": {
+            "autoIndexId": true,
+            "validator": {
+                "$jsonSchema": {
+                    "bsonType": "object",
+                    "required": [
+                        "name",
+                        "email"
+                    ],
+                    "properties": {
+                        "name": {
+                            "bsonType": "string",
+                            "description": "must be a string and is required"
+                        },
+                        "email": {
+                            "bsonType": "string",
+                            "pattern": "^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$",
+                            "description": "must be a string and is required"
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

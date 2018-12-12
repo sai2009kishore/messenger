@@ -2,7 +2,6 @@ var { verifyJWTToken } = require('./libs/auth');
 
 function verifyJWT_MW(req, res, next) {
     let token = req.get('jwt-token');
-    console.log(token);
     verifyJWTToken(token)
         .then((decodedToken) => {
             req.user = decodedToken.data

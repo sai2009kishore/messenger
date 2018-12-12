@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var messageRouter = require('./message');
-var userRouter = require('./user');
+var messageRouter = require('./messageHandler');
+var userRouter = require('./userHandler');
 var middleware = require('../middleware');
 var { createJWToken } = require('../libs/auth');
 

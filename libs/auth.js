@@ -1,9 +1,11 @@
 var jwt = require('jsonwebtoken');
 var { _ } = require('lodash');
+var config = require('../config.json');
 
 function verifyJWTToken(token) {
+    console.log(token);
     return new Promise((resolve, reject) => {
-        jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
+        jwt.verify(token, config.SECRET_KEY, (err, decodedToken) => {
             if (err || !decodedToken) {
                 return reject(err)
             }
@@ -29,9 +31,12 @@ function createJWToken(details) {
         return memo
     }, {})
 
-    let token = jwt.sign({
-        data: details.sessionData
-    }, "secret", process.env.JWT_SECRET, {
+    let token = jwt.sign(
+        {
+            data: details.sessionData
+        },
+        config.SECRET_KEY,
+        process.env.JWT_SECRET, {
             expiresIn: details.maxAge,
             algorithm: 'HS256'
         })

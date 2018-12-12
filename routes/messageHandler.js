@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var { MessageController } = require('./../public/javascripts/messageController');
+var { MessageController } = require('../public/javascripts/messageController');
 var messageController = new MessageController();
 router.get('/', function (req, res, next) {
     messageController.getMessages(function (result) {

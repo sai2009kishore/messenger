@@ -6,6 +6,8 @@ var logger = require('morgan');
 var mongoUtil = require('./public/utils/mongoUtil');
 var indexRouter = require('./routes/index');
 var app = express();
+var { UserController } = require('./public/javascripts/handlers/userHandler');
+var userController = new UserController();
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -41,21 +43,16 @@ mongoUtil.connectToServer(function (err, db) {
     db.listCollections().toArray(function (err, collInfos) {
       collInfos.map(collection => {
         if (collection.name in collections) {
-          missing_collections.pop(collection.name);
+          missing_collections[missing_collections.indexOf(collection.name)] = undefined;
         }
       });
-      missing_collections.map(collection => {
+      missing_collections.filter(item => item !== undefined).map(collection => {
         db.createCollection(collection, collections[collection]);
         console.log('Created collection ' + collection);
       });
       if (missing_collections.indexOf('Users') > -1) {
-        let defaultUser = { name: "admin", password: "admin", email: "admin@messenger.com" };
-        db.collection('Users').insertOne(defaultUser, function (err, res) {
-          if (err) {
-            console.log(err);
-          } else {
-            console.log('Admin created successfully');
-          }
+        userController.createUser({ email: "admin@test.com", name: "admin", password: "admin" }, function() {
+          console.log('Added Admin');
         });
       }
     });

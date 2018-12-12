@@ -15,8 +15,9 @@ function handleLogin(req, res) {
                         success: true,
                         token: createJWToken({
                             sessionData: {
-                                "name": result[0],
-                                "email": "sai2009kishore@gmail.com",
+                                "name": result[0].name,
+                                "email": result[0].email,
+                                "id": result[0]._id
                             },
                             maxAge: 3600
                         })

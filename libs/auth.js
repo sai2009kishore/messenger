@@ -3,7 +3,6 @@ var { _ } = require('lodash');
 var config = require('../config.json');
 
 function verifyJWTToken(token) {
-    console.log(token);
     return new Promise((resolve, reject) => {
         jwt.verify(token, config.SECRET_KEY, (err, decodedToken) => {
             if (err || !decodedToken) {
@@ -11,8 +10,8 @@ function verifyJWTToken(token) {
             }
 
             resolve(decodedToken)
-        })
-    })
+        });
+    });
 }
 
 function createJWToken(details) {

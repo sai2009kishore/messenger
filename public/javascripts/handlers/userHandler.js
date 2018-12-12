@@ -3,8 +3,8 @@ var mongoUtil = require('../../utils/mongoUtil');
 class UserController {
     getUsers(callback) {
         let db = mongoUtil.getDb();
-        db.collection('Users').find({}).toArray(function(err, result) {
-            if(err) {
+        db.collection('Users').find({}).toArray(function (err, result) {
+            if (err) {
                 callback(err.message);
             } else {
                 callback(result);

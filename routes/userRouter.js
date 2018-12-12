@@ -3,7 +3,7 @@ var router = express.Router();
 var { UserController } = require('../public/javascripts/handlers/userHandler');
 var userController = new UserController();
 router.get('/', function (req, res, next) {
-    userController.getUsers(function(result) {
+    userController.getUsers(function (result) {
         res.send(result);
     });
 });

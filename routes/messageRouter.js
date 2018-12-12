@@ -15,7 +15,7 @@ router.post('/', function (req, res, next) {
 });
 
 router.get('/getMessagesByState/:state', function (req, res, next) {
-    messageController.getMessagesByState(req.params.state, function(result) {
+    messageController.getMessagesByState(req.params.state, function (result) {
         res.send(result);
     });
 });

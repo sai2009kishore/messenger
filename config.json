@@ -43,7 +43,8 @@
                     "bsonType": "object",
                     "required": [
                         "name",
-                        "email"
+                        "email",
+                        "password"
                     ],
                     "properties": {
                         "name": {
@@ -53,6 +54,10 @@
                         "email": {
                             "bsonType": "string",
                             "pattern": "^\\w+@[a-zA-Z_]+?\\.[a-zA-Z]{2,3}$",
+                            "description": "must be a string and is required"
+                        },
+                        "password": {
+                            "bsonType": "string",
                             "description": "must be a string and is required"
                         }
                     }

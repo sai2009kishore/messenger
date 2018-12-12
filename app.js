@@ -48,6 +48,16 @@ mongoUtil.connectToServer(function (err, db) {
         db.createCollection(collection, collections[collection]);
         console.log('Created collection ' + collection);
       });
+      if (missing_collections.indexOf('Users') > -1) {
+        let defaultUser = { name: "admin", password: "admin", email: "admin@messenger.com" };
+        db.collection('Users').insertOne(defaultUser, function (err, res) {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log('Admin created successfully');
+          }
+        });
+      }
     });
   }
 });

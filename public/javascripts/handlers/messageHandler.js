@@ -1,4 +1,4 @@
-var mongoUtil = require('../utils/mongoUtil');
+var mongoUtil = require('../../utils/mongoUtil');
 
 class MessageController {
     getMessages(callback) {

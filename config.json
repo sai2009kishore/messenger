@@ -59,6 +59,14 @@
                         "password": {
                             "bsonType": "string",
                             "description": "must be a string and is required"
+                        },
+                        "isUpdated": {
+                            "bsonType": "boolean",
+                            "description": "must be a string and is required"
+                        },
+                        "isDeleted": {
+                            "bsonType": "boolean",
+                            "description": "must be a string and is required"
                         }
                     }
                 }

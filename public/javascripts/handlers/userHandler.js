@@ -1,5 +1,7 @@
 var mongoUtil = require('../../utils/mongoUtil');
 var Response = require('../../utils/response');
+var ObjectId = require('mongodb').ObjectID;
+
 class UserController {
     getUsers(callback) {
         this._getUser({}, null, callback);

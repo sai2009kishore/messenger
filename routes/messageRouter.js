@@ -14,6 +14,18 @@ router.post('/', function (req, res, next) {
     });
 });
 
+router.patch('/', function (req, res, next) {
+    messageController.updateMessage(req, function (result) {
+        res.status(result.getStatus()).send(result);
+    });
+});
+
+router.patch('/markAllAsDelivered', function (req, res, next) {
+    messageController.markAllAsDelivered(req, function (result) {
+        res.status(result.getStatus()).send(result);
+    });
+});
+
 router.get('/getMessagesByState/:state', function (req, res, next) {
     messageController.getMessagesByState(req, function (result) {
         res.status(result.getStatus()).send(result);

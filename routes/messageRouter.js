@@ -26,6 +26,12 @@ router.patch('/markAllAsDelivered', function (req, res, next) {
     });
 });
 
+router.patch('/markAllAsRead', function (req, res, next) {
+    messageController.markAllAsRead(req, function (result) {
+        res.status(result.getStatus()).send(result);
+    });
+});
+
 router.get('/getMessagesByState/:state', function (req, res, next) {
     messageController.getMessagesByState(req, function (result) {
         res.status(result.getStatus()).send(result);

@@ -111,6 +111,14 @@ class MessageController {
     }
 
     markAllAsDelivered(req, callback) {
+        this._changeState(req, callback, 1);
+    }
+
+    markAllAsRead(req, callback) {
+        this._changeState(req, callback, 2);
+    }
+
+    _changeState(req, callback, state) {
         var outer = this;
         this._decodeToken(req, function (user) {
             outer._updateMessage(
@@ -121,7 +129,7 @@ class MessageController {
                 },
                 {
                     $set: {
-                        state: 1,
+                        state: state,
                     }
                 },
                 function (err, result) {
@@ -139,7 +147,6 @@ class MessageController {
                 }
             );
         });
-        // callback(new Response(200, 'Marked all messages as delivered'));
     }
 }
 

@@ -5,7 +5,7 @@ function handleLogin(req, res) {
     let db = mongoUtil.getDb();
     db.collection('Users').find({ email: req.body.email, password: req.body.password }, { password: 0 }).toArray(function (err, result) {
         if (err) {
-            res.send(500).send('A server error occured while loggin in');
+            res.status(500).send('A server error occured while loggin in');
         } else {
             if (result.length === 0) {
                 res.status(401).send('Invalid login credentials');
@@ -15,9 +15,9 @@ function handleLogin(req, res) {
                         success: true,
                         token: createJWToken({
                             sessionData: {
-                                "name": result[0].name,
-                                "email": result[0].email,
-                                "id": result[0]._id
+                                'name': result[0].name,
+                                'email': result[0].email,
+                                'id': result[0]._id
                             },
                             maxAge: 3600
                         })

@@ -1,5 +1,5 @@
 {
-    "MONGODB_URL": "mongodb://localhost:27018/test",
+    "MONGODB_URL": "mongodb://localhost:27017/test",
     "SECRET_KEY": "FBFVs6!H}qv)5VR}",
     "INITIAL_DB": {
         "Messages": {

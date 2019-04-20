@@ -1,5 +1,5 @@
 {
-    "MONGODB_URL": "mongodb://localhost:27017/test",
+    "MONGODB_URL": "mongodb://localhost:27017/messenger",
     "SECRET_KEY": "FBFVs6!H}qv)5VR}",
     "INITIAL_DB": {
         "Messages": {
@@ -61,11 +61,11 @@
                             "description": "must be a string and is required"
                         },
                         "isUpdated": {
-                            "bsonType": "boolean",
+                            "bsonType": "bool",
                             "description": "must be a string and is required"
                         },
                         "isDeleted": {
-                            "bsonType": "boolean",
+                            "bsonType": "bool",
                             "description": "must be a string and is required"
                         }
                     }

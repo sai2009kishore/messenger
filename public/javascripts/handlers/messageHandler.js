@@ -141,7 +141,7 @@ class MessageController {
                         } else if (result.nModified === 0) {
                             callback(new Response(200, 'No changes made'));
                         } else {
-                            callback(new Response(200, result.n + ' were messages marked delivered'));
+                            callback(new Response(200, result.n + ' messages were marked delivered'));
                         }
                     }
                 }

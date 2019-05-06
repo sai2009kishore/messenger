@@ -9,6 +9,12 @@ router.get('/', function (req, res, next) {
     });
 });
 
+router.get('/:id', function (req, res, next) {
+    userController.getUserById(req.params.id, function (result) {
+        res.status(result.getStatus()).send(result);
+    });
+});
+
 router.post('/', function (req, res, next) {
     userController.createUser(req.body, function (result) {
         res.status(result.getStatus()).send(result);

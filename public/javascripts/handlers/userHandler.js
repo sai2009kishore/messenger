@@ -18,6 +18,18 @@ class UserController {
         });
     }
 
+    getUserById(id, callback) {
+        let db = mongoUtil.getDb();
+        db.collection('Users').find({ id: id }, { password: 0 }).toArray(function (err, result) {
+            if (err) {
+                callback(new Response(500, err.message));
+            } else {
+                console.log(result);
+                callback(new Response(200, 'Retrieved successfully'), result);
+            }
+        });
+    }
+
     createUser(user, callback) {
         let db = mongoUtil.getDb();
         this._getUser({ email: user.email }, { email: 1 }, function (result) {
